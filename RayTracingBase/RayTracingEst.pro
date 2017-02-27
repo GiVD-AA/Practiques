@@ -8,6 +8,8 @@ LIBPATH += /opt/X11/lib
 LIBS += -lGL
 LIBS += -lglut
 
+QMAKE_CXXFLAGS += -std=c++11
+
 SOURCES += \
     RayTracing.cpp \
     Scene.cpp \
@@ -19,7 +21,9 @@ SOURCES += \
     Lambertian.cpp \
     BoundaryObject.cpp \
     ReadFile.cpp \
-    Cara.cpp
+    Cara.cpp \
+    Triangle.cpp \
+    Plane.cpp
 
 
 include(deployment.pri)
@@ -159,4 +163,6 @@ HEADERS += \
     RayTracing.h \
     BoundaryObject.h \
     ReadFile.h \
-    Cara.h
+    Cara.h \
+    Triangle.h \
+    Plane.h

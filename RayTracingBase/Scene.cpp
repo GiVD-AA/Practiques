@@ -7,8 +7,8 @@ Scene::Scene()
     vec3 lookat(3,0,0);
     float dist_to_focus = 10.0;
     float aperture = 0.5;
-    int pixelsX = 200;
-    int pixelsY = 200;
+    int pixelsX = 800;
+    int pixelsY = 600;
     cam = new Camera(lookfrom, lookat, vec3(0,1,0), 20, pixelsX, pixelsY, aperture, dist_to_focus);
 
    // TODO: Cal crear els objectes de l'escena
@@ -35,6 +35,7 @@ void Scene::RandomScene() {
 
     objects.push_back(new Sphere(vec3(0, 0, -1), 0.5, new Lambertian(vec3(0.5, 0.2, 0.7))));
 
+    objects.push_back(new Triangle(vec3(0,0,0), vec3(0,-1,-1), vec3(-1,-1,1), new Lambertian(vec3(0.1, 0.2, 0.5))));
 
     objects.push_back(new Sphere(vec3(0,-1,-1), 0.5, new Lambertian(vec3(0.1, 0.2, 0.5))));
     objects.push_back(new Sphere(vec3(1,-1,-1), 0.5, new Lambertian(vec3(0.8, 0.6, 0.2))));
@@ -73,6 +74,23 @@ bool Scene::hit(const Ray& raig, float t_min, float t_max, HitInfo& info) const
 			}
 	info = tmp;
 	return h;
+/* for (unsigned int i = 0; i < objects.size(); i++) {
+        obj = objects[i];
+        //true = intersecta el raig amb el objecte
+        if (obj->hit(raig,t_min,t_max,tmp)) {
+            //extraiem la t de tmp. si es troba dintre del interval vol dir que almenys un objecte esta dintre de la escena
+            //if (dynamic_cast<Triangle*>(objects[i])) cout << "false 3" << endl;
+            if (tmp.t >= t_min && tmp.t <= t_max) {
+                intersectedScene = true;
+                //comprovem si es el que mes aprop esta del expectador
+                if (t < tmp.t) {
+                    info = tmp;
+                    t = info.t;
+                }
+            }
+        }
+    }
+*/
 	//return objects[0]->hit(raig, t_min, t_max, info);
     //return true;
     // TODO: Heu de codificar la vostra solucio per aquest metode substituint el 'return true'
